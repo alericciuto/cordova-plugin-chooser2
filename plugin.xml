@@ -7,6 +7,8 @@
 >	
 	<name>Chooser</name>
 	<repo>https://github.com/alericciuto/cordova-plugin-chooser.git</repo>
+	<issue>https://github.com/alericciuto/cordova-plugin-chooser/issues</issue>
+
 
 	<js-module src="www/chooser.js" name="Chooser">
 		<clobbers target="chooser" />
