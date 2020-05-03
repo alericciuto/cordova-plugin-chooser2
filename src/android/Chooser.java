@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.pm.PackageManager;
+import android.content.Context;
 
 
 public class Chooser extends CordovaPlugin {
