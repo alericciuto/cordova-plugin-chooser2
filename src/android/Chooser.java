@@ -16,7 +16,7 @@ import java.lang.Exception;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
-import org.apache.cordova.FileProvider;
+import org.apache.cordova.camera.FileProvider;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,16 +82,16 @@ public class Chooser extends CordovaPlugin {
 	    	if (callbackContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) && captureIntent.resolveActivity(callbackContext.getPackageManager()) != null) {
 			try {
 			    File tempFile = new File(callbackContext.getFilesDir(), "tmp.jpg");
-			    Log.d(LOG_TAG, "Temporary photo capture file: " + tempFile);
-			    tempUri = FileProvider.getUriForFile(callbackContext, callbackContext.getPackageName() ".provider", tempFile)
-			    Log.d(LOG_TAG, "Temporary photo capture URI: " + tempUri);
+			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
+			    tempUri = FileProvider.getUriForFile(callbackContext, callbackContext.getPackageName() + ".provider", tempFile);
+			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
 			    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
 			} catch (Exception e) {
-			    Log.e(LOG_TAG, "Unable to create temporary file for photo capture", e);
+			    Log.e(TAG, "Unable to create temporary file for photo capture", e);
 			    captureIntent = null;
 			}
 		} else {
-			Log.w(LOG_TAG, "Device does not support photo capture");
+			Log.w(TAG, "Device does not support photo capture");
 			captureIntent = null;
 		}
 		
