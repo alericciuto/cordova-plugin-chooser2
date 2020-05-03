@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import android.content.pm.PackageManager;
 import android.content.Context;
+import android.util.Log;
+import java.io.File;
 
 
 public class Chooser extends CordovaPlugin {
