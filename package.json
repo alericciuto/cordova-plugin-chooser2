@@ -20,7 +20,7 @@
 		"url": "https://github.com/alericciuto/cordova-plugin-chooser/issues"
 	},
 	"cordova": {
-		"id": "cordova-plugin-chooser",
+		"id": "cordova-plugin-chooser2",
 		"platforms": [
 			"android",
 			"ios"
