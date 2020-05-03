@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.pm.PackageManager;
+
 
 public class Chooser extends CordovaPlugin {
 	private static final String ACTION_OPEN = "getFile";
@@ -79,11 +81,12 @@ public class Chooser extends CordovaPlugin {
 		Uri tempUri = null;
 		Intent captureIntent = captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 			.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-	    	if (callbackContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) && captureIntent.resolveActivity(callbackContext.getPackageManager()) != null) {
+		Context context = this.cordova.getActivity().getApplicationContext();
+	    	if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) && captureIntent.resolveActivity(context.getPackageManager()) != null) {
 			try {
-			    File tempFile = new File(callbackContext.getFilesDir(), "tmp.jpg");
+			    File tempFile = new File(context.getFilesDir(), "tmp.jpg");
 			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
-			    tempUri = FileProvider.getUriForFile(callbackContext, callbackContext.getPackageName() + ".provider", tempFile);
+			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", tempFile);
 			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
 			    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
 			} catch (Exception e) {
