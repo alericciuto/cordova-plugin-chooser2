@@ -6,6 +6,7 @@
 	version="1.0.0"
 >	
 	<name>Chooser</name>
+	<repo>https://github.com/alericciuto/cordova-plugin-chooser.git</repo>
 
 	<js-module src="www/chooser.js" name="Chooser">
 		<clobbers target="chooser" />
