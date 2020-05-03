@@ -1,11 +1,11 @@
 {
-	"name": "cordova-plugin-chooser",
+	"name": "cordova-plugin-chooser2",
 	"version": "1.0.0",
 	"description": "Cordova file chooser plugin",
 	"main": "index.js",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/alericciuto/cordova-plugin-chooser.git"
+		"url": "git+https://github.com/alericciuto/cordova-plugin-chooser2.git"
 	},
 	"keywords": [
 		"file",
@@ -17,7 +17,7 @@
 	],
 	"license": "Apache-2.0",
 	"bugs": {
-		"url": "https://github.com/alericciuto/cordova-plugin-chooser/issues"
+		"url": "https://github.com/alericciuto/cordova-plugin-chooser2/issues"
 	},
 	"cordova": {
 		"id": "cordova-plugin-chooser2",
