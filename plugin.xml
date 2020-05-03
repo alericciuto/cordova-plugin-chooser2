@@ -2,12 +2,12 @@
 <plugin 
 	xmlns="http://www.phonegap.com/ns/plugins/1.0" 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
-	id="cordova-plugin-chooser" 
+	id="cordova-plugin-chooser2" 
 	version="1.0.0"
 >	
 	<name>Chooser</name>
-	<repo>https://github.com/alericciuto/cordova-plugin-chooser.git</repo>
-	<issue>https://github.com/alericciuto/cordova-plugin-chooser/issues</issue>
+	<repo>https://github.com/alericciuto/cordova-plugin-chooser2.git</repo>
+	<issue>https://github.com/alericciuto/cordova-plugin-chooser2/issues</issue>
 
 
 	<js-module src="www/chooser.js" name="Chooser">
