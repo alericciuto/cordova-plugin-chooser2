@@ -89,8 +89,7 @@ public class Chooser extends CordovaPlugin {
 			try {
 			    File tempFile = new File(context.getFilesDir(), "tmp.jpg");
 			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
-			    //tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", tempFile);
-			    tempUri = Uri.parse(tempFile.getPath());
+			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".opener.provider", tempFile);
 			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
 			    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
 			} catch (Exception e) {
