@@ -1,4 +1,4 @@
-package com.plugin.cordova;
+package org.apache.cordova;
 
 import android.app.Activity;
 import android.content.ContentResolver;
