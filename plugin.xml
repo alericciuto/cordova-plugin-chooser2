@@ -15,13 +15,33 @@
 	</js-module>
 
 	<platform name="android">
-		<source-file src="src/android/Chooser.java" target-dir="src/org/apache/cordova" />
+		<source-file src="src/android/Chooser.java" target-dir="src/org/apache/cordova/chooser" />
+		<source-file src="src/android/xml/chooser_provider_paths.xml" target-dir="res/xml" />
+		<source-file src="src/android/FileProvider.java" target-dir="src/org/apache/cordova/chooser" />
 
 		<config-file target="config.xml" parent="/*">
 			<feature name="Chooser">
-				<param name="android-package" value="org.apache.cordova.Chooser" />
+				<param name="android-package" value="org.apache.cordova.chooser.Chooser" />
 			</feature>
 		</config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/*">
+		    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		</config-file>
+		<config-file target="AndroidManifest.xml" parent="application">
+		  <provider
+		      android:name="org.apache.cordova.chooser.FileProvider"
+		      android:authorities="${applicationId}.chooser.provider"
+		      android:exported="false"
+		      android:grantUriPermissions="true" >
+		      <meta-data
+			  android:name="android.support.FILE_PROVIDER_PATHS"
+			  android:resource="@xml/chooser_provider_paths"/>
+		  </provider>
+		</config-file>
+		
+		<preference name="ANDROID_SUPPORT_V4_VERSION" default="27.+"/>
+		<framework src="com.android.support:support-v4:$ANDROID_SUPPORT_V4_VERSION"/>
 	</platform>
 
 	<platform name="ios">
