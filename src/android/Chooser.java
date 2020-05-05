@@ -172,6 +172,11 @@ public class Chooser extends CordovaPlugin {
 						);
 
 						base64 = Base64.encodeToString(bytes, Base64.DEFAULT);
+						
+						Context context = this.cordova.getActivity().getApplicationContext();
+						File captureFile = new File(context.getFilesDir(), captureFileName);
+						if(captureFile.exists())
+							captureFile.delete();
 
 						JSONObject result = new JSONObject();
 
