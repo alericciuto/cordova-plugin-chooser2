@@ -109,7 +109,7 @@ public class Chooser extends CordovaPlugin {
 
 		// Chooser intent
 		if (captureIntent != null) {
-		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { intent, captureIntent });
+		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { captureIntent });
 		}
 		
 		cordova.startActivityForResult(this, chooser, Chooser.PICK_FILE_REQUEST);
@@ -141,14 +141,13 @@ public class Chooser extends CordovaPlugin {
 
 	@Override
 	public void onActivityResult (int requestCode, int resultCode, Intent data) {
+		Log.d(TAG, "results");
 		try {
 			if (requestCode == Chooser.PICK_FILE_REQUEST && this.callback != null) {
 				if (resultCode == Activity.RESULT_OK) {
 					Uri uri = null;
 					
-					Log.d(TAG, "INTENT = " + data.toString());
-					
-					if(data.getAction() == Intent.ACTION_GET_CONTENT){
+					if(data != null){
 						uri = data.getData();
 						Log.d(TAG, "FROM FILE MANAGER URI = " + uri);
 					}else{
