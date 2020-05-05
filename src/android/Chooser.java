@@ -109,7 +109,7 @@ public class Chooser extends CordovaPlugin {
 
 		// Chooser intent
 		if (captureIntent != null) {
-		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { captureIntent });
+		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { intent, captureIntent });
 		}
 		
 		cordova.startActivityForResult(this, chooser, Chooser.PICK_FILE_REQUEST);
