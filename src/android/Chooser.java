@@ -148,11 +148,13 @@ public class Chooser extends CordovaPlugin {
 				if (resultCode == Activity.RESULT_OK) {
 					Uri uri = null;
 					
-					if(!capture)
+					if(!capture){
 						uri = data.getData();
-					else	uri = captureUri;
-					
-					Log.d(TAG, "URI = " + uri);
+						Log.d(TAG, "FROM FILE MANAGER URI = " + uri);
+					}else{
+						uri = captureUri;
+						Log.d(TAG, "FROM CAMERA URI = " + uri);
+					}
 
 					if (uri != null) {
 						ContentResolver contentResolver =
