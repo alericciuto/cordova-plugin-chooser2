@@ -35,6 +35,7 @@ public class Chooser extends CordovaPlugin {
 	private static final int PICK_FILE_REQUEST = 1;
 	private static final String TAG = "Chooser";
 	private boolean capture = false;
+	private String captureFileName;
 	private Uri captureUri = null;
 
 	/** @see https://stackoverflow.com/a/17861016/459881 */
@@ -90,7 +91,8 @@ public class Chooser extends CordovaPlugin {
 		Context context = this.cordova.getActivity().getApplicationContext();
 	    	if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) && captureIntent.resolveActivity(context.getPackageManager()) != null) {
 			try {
-			    File tempFile = new File(context.getFilesDir(), "tmp.jpg");
+			    captureFileName = System.currentTimeMillis() + ".jpg";
+			    File tempFile = new File(context.getFilesDir(), captureFileName);
 			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
 			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".chooser.provider", tempFile);
 			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
