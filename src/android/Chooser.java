@@ -13,10 +13,12 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.lang.Exception;
 
+import org.apache.cordova.BuildHelper;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.camera.FileProvider;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +34,7 @@ public class Chooser extends CordovaPlugin {
 	private static final String INCLUDE_DATA = "com.cyph.cordova.INCLUDE_DATA";
 	private static final int PICK_FILE_REQUEST = 1;
 	private static final String TAG = "Chooser";
+	private boolean capture = false;
 	private Uri captureUri = null;
 
 	/** @see https://stackoverflow.com/a/17861016/459881 */
@@ -89,7 +92,7 @@ public class Chooser extends CordovaPlugin {
 			try {
 			    File tempFile = new File(context.getFilesDir(), "tmp.jpg");
 			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
-			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".opener.provider", tempFile);
+			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", tempFile);
 			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
 			    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
 			} catch (Exception e) {
@@ -105,6 +108,7 @@ public class Chooser extends CordovaPlugin {
 
 		// Chooser intent
 		if (captureIntent != null) {
+		    capture = true;
 		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { captureIntent });
 		}
 		
@@ -142,7 +146,7 @@ public class Chooser extends CordovaPlugin {
 				if (resultCode == Activity.RESULT_OK) {
 					Uri uri = null;
 					
-					if(captureUri == null)
+					if(!capture)
 						uri = data.getData();
 					else uri = captureUri;
 
