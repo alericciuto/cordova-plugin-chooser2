@@ -148,6 +148,8 @@ public class Chooser extends CordovaPlugin {
 				if (resultCode == Activity.RESULT_OK) {
 					Uri uri = null;
 					
+					Log.d(TAG, "INTENT = " + data.toString());
+					
 					if(!capture){
 						uri = data.getData();
 						Log.d(TAG, "FROM FILE MANAGER URI = " + uri);
