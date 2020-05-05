@@ -34,7 +34,6 @@ public class Chooser extends CordovaPlugin {
 	private static final String INCLUDE_DATA = "com.cyph.cordova.INCLUDE_DATA";
 	private static final int PICK_FILE_REQUEST = 1;
 	private static final String TAG = "Chooser";
-	private boolean capture = false;
 	private String captureFileName;
 	private Uri captureUri = null;
 
@@ -86,7 +85,7 @@ public class Chooser extends CordovaPlugin {
 		
 		// Image from camera intent
 		Uri tempUri = null;
-		Intent captureIntent = captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+		Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 			.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		Context context = this.cordova.getActivity().getApplicationContext();
 	    	if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA) && captureIntent.resolveActivity(context.getPackageManager()) != null) {
@@ -110,7 +109,6 @@ public class Chooser extends CordovaPlugin {
 
 		// Chooser intent
 		if (captureIntent != null) {
-		    capture = true;
 		    chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { captureIntent });
 		}
 		
@@ -150,7 +148,7 @@ public class Chooser extends CordovaPlugin {
 					
 					Log.d(TAG, "INTENT = " + data.toString());
 					
-					if(!capture){
+					if(data.getAction() == Intent.ACTION_GET_CONTENT){
 						uri = data.getData();
 						Log.d(TAG, "FROM FILE MANAGER URI = " + uri);
 					}else{
@@ -207,6 +205,5 @@ public class Chooser extends CordovaPlugin {
 		catch (Exception err) {
 			this.callback.error("Failed to read file: " + err.toString());
 		}
-		capture = false;
 	}
 }
