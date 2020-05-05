@@ -1,4 +1,4 @@
-package org.apache.cordova;
+package org.apache.cordova.chooser;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -17,7 +17,7 @@ import org.apache.cordova.BuildHelper;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
-import org.apache.cordova.camera.FileProvider;
+import android.support.v4.content.FileProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,7 +81,7 @@ public class Chooser extends CordovaPlugin {
 		intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
 		intent.putExtra(Chooser.INCLUDE_DATA, includeData);
 
-		Intent chooser = Intent.createChooser(intent, "Select File"); 	
+		Intent chooser = Intent.createChooser(intent, null); 	
 		
 		// Image from camera intent
 		Uri tempUri = null;
@@ -92,7 +92,7 @@ public class Chooser extends CordovaPlugin {
 			try {
 			    File tempFile = new File(context.getFilesDir(), "tmp.jpg");
 			    Log.d(TAG, "Temporary photo capture file: " + tempFile);
-			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", tempFile);
+			    tempUri = FileProvider.getUriForFile(context, context.getPackageName() + ".chooser.provider", tempFile);
 			    Log.d(TAG, "Temporary photo capture URI: " + tempUri);
 			    captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
 			} catch (Exception e) {
@@ -148,7 +148,9 @@ public class Chooser extends CordovaPlugin {
 					
 					if(!capture)
 						uri = data.getData();
-					else uri = captureUri;
+					else	uri = captureUri;
+					
+					Log.d(TAG, "URI = " + uri);
 
 					if (uri != null) {
 						ContentResolver contentResolver =
@@ -156,8 +158,11 @@ public class Chooser extends CordovaPlugin {
 						;
 
 						String name = Chooser.getDisplayName(contentResolver, uri);
+						
+						Log.d(TAG, "NAME = " + name);
 
 						String mediaType = contentResolver.getType(uri);
+						Log.d(TAG, "MEDIATYPE = " + mediaType);
 						if (mediaType == null || mediaType.isEmpty()) {
 							mediaType = "application/octet-stream";
 						}
@@ -196,5 +201,6 @@ public class Chooser extends CordovaPlugin {
 		catch (Exception err) {
 			this.callback.error("Failed to read file: " + err.toString());
 		}
+		capture = false;
 	}
 }
